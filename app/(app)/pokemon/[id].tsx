@@ -9,9 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { pokemonColors } from "../index"; // Import warna dari index (atau pindahkan colors ke file constants terpisah)
-
-// Interface untuk Detail Lengkap (Stats, Height, Weight)
+import { pokemonColors } from "../index";
 interface PokemonDetail {
   id: number;
   name: string;
@@ -19,7 +17,7 @@ interface PokemonDetail {
   weight: number;
   sprites: {
     front_default: string;
-    other: { "official-artwork": { front_default: string } }; // Gambar HD
+    other: { "official-artwork": { front_default: string } };
   };
   types: { type: { name: string } }[];
   stats: { base_stat: number; stat: { name: string } }[];
@@ -27,7 +25,6 @@ interface PokemonDetail {
 }
 
 export default function PokemonDetail() {
-  // 1. Tangkap ID dari URL
   const { id } = useLocalSearchParams();
 
   const [pokemon, setPokemon] = useState<PokemonDetail | null>(null);
@@ -75,24 +72,21 @@ export default function PokemonDetail() {
 
           headerLeft: () => (
             <TouchableOpacity
-              onPress={() => router.back()} // Aksi kembali
-              className="bg-white/20 p-2 rounded-full ml-[-8px]" // Style tombol (Kaca transparan)
+              onPress={() => router.back()}
+              className="bg-white/20 p-2 rounded-full ml-[-8px]"
               activeOpacity={0.7}
             >
-              {/* Icon Lucide Konsisten */}
               <ChevronLeft color="white" size={28} />
             </TouchableOpacity>
           ),
         }}
       />
 
-      {/* Bagian Atas (Background Warna) */}
       <View
         style={{ backgroundColor: bgColor }}
         className="h-[45%] items-center justify-end rounded-b-[50px] overflow-visible z-10"
       >
         <Image
-          // Pakai gambar Official Artwork biar HD
           source={{
             uri:
               pokemon.sprites.other["official-artwork"].front_default ||
@@ -103,9 +97,7 @@ export default function PokemonDetail() {
         />
       </View>
 
-      {/* Bagian Bawah (Info) */}
       <ScrollView className="mt-12 px-6 pt-4">
-        {/* Nama & ID */}
         <View className="items-center mb-6">
           <Text className="text-3xl font-extrabold capitalize text-gray-800">
             {pokemon.name}
@@ -117,8 +109,6 @@ export default function PokemonDetail() {
             <Text className="text-white font-bold capitalize">{mainType}</Text>
           </View>
         </View>
-
-        {/* Berat & Tinggi */}
         <View className="flex-row justify-center gap-8 mb-8">
           <View className="items-center">
             <Text className="text-gray-500 text-sm font-bold">Weight</Text>
@@ -134,7 +124,6 @@ export default function PokemonDetail() {
           </View>
         </View>
 
-        {/* Base Stats */}
         <Text className="text-xl font-bold text-gray-800 mb-4">Base Stats</Text>
         <View className="gap-3 pb-10">
           {pokemon.stats.map((stat) => (
@@ -145,7 +134,6 @@ export default function PokemonDetail() {
               <Text className="w-10 font-bold text-gray-800 text-right mr-3">
                 {stat.base_stat}
               </Text>
-              {/* Progress Bar */}
               <View className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
                 <View
                   className="h-full rounded-full"

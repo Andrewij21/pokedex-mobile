@@ -1,5 +1,5 @@
 import { useSession } from "@/context/ctx";
-import { Ionicons } from "@expo/vector-icons"; // Pastikan sudah install icon
+import { Ionicons } from "@expo/vector-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
@@ -21,13 +21,12 @@ import { login } from "../services";
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { setSession } = useSession();
-  // 1. Setup React Hook Form
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginSchemaFormData>({
-    resolver: zodResolver(loginSchema), // Sambungkan Zod disini
+    resolver: zodResolver(loginSchema),
     mode: "onSubmit",
     reValidateMode: "onChange",
     defaultValues: {
@@ -37,7 +36,7 @@ export default function LoginForm() {
   });
 
   const mutation = useMutation({
-    mutationFn: login, // Fungsi service dipanggil disini
+    mutationFn: login,
 
     onSuccess: (data) => {
       console.log("✅ Login Berhasil:", data);
@@ -54,22 +53,18 @@ export default function LoginForm() {
     },
 
     onError: (error: AxiosError) => {
-      // Error handling otomatis
-      console.error("❌ Login Gagal:", error);
       const errorMessage =
         (error.response?.data as any)?.message || "Terjadi kesalahan server";
       Alert.alert("Login Gagal", errorMessage);
     },
   });
 
-  // 4. Handle Submit (Trigger Mutation)
   const onSubmit = (formData: LoginSchemaFormData) => {
     mutation.mutate(formData);
   };
 
   return (
     <View className="w-full">
-      {/* --- INPUT EMAIL --- */}
       <View className="mb-4">
         <Text className="text-gray-700 font-medium mb-2">Username</Text>
 
@@ -93,7 +88,6 @@ export default function LoginForm() {
             />
           )}
         />
-        {/* Error Message Email */}
         {errors.username && (
           <Text className="text-red-500 text-sm mt-1 ml-1">
             {errors.username.message}
@@ -119,14 +113,12 @@ export default function LoginForm() {
                 placeholder="••••••••"
                 placeholderTextColor="#9CA3AF"
                 autoCapitalize="none"
-                // Logic Toggle Password
                 secureTextEntry={!showPassword}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
               />
 
-              {/* Tombol Mata */}
               <TouchableOpacity
                 onPress={() => setShowPassword(!showPassword)}
                 className="absolute right-4"
