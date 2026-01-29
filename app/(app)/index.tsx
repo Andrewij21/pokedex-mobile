@@ -50,7 +50,7 @@ export default function Index() {
   const debaouceSearch = useDebounce<string>(search);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [selectedType, setSelectedType] = useState<string | null>("");
-  const { session, signOut } = useSession();
+  const { session, clearSession } = useSession();
   const fetchPokemons = async () => {
     setLoading(true);
     setError(null);
@@ -166,7 +166,7 @@ export default function Index() {
       {
         text: "Sign Out",
         style: "destructive",
-        onPress: () => signOut(),
+        onPress: () => clearSession(),
       },
     ]);
   };

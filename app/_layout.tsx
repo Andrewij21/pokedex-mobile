@@ -1,4 +1,5 @@
 import { SessionProvider, useSession } from "@/context/ctx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Slot, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
@@ -26,10 +27,13 @@ function NavRootLayout() {
   }
   return <Slot />;
 }
+const queryClient = new QueryClient();
 export default function RootLayout() {
   return (
-    <SessionProvider>
-      <NavRootLayout />
-    </SessionProvider>
+    <QueryClientProvider client={queryClient}>
+      <SessionProvider>
+        <NavRootLayout />
+      </SessionProvider>
+    </QueryClientProvider>
   );
 }
