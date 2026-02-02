@@ -49,7 +49,7 @@ export default function LoginForm() {
       });
 
       Alert.alert("Welcome!", `Halo, ${data.username}`);
-      router.replace("/(app)");
+      router.replace("/(app)/(tabs)");
     },
 
     onError: (error: AxiosError) => {

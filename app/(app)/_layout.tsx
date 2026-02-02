@@ -6,11 +6,11 @@ export default function AppLayout() {
       screenOptions={{
         headerShown: false,
         contentStyle: {
-          backgroundColor: "white",
+          backgroundColor: "red",
         },
       }}
     >
-      <Stack.Screen name="index" />
+      <Stack.Screen name="(tabs)" />
       <Stack.Screen name="pokemon/[id]" />
     </Stack>
   );

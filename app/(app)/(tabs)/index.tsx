@@ -171,7 +171,7 @@ export default function Index() {
     ]);
   };
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 " edges={["left", "right", "top"]}>
       <View className="px-4 py-2 mb-2">
         <View className="flex flex-row items-center gap-2 justify-between">
           <Text className="text-3xl font-extrabold text-gray-900 tracking-tight">

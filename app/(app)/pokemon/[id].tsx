@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { pokemonColors } from "../index";
+import { pokemonColors } from "../(tabs)/index";
 interface PokemonDetail {
   id: number;
   name: string;
